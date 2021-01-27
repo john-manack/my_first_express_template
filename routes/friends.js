@@ -6,9 +6,12 @@ const express = require("express"),
 const friendsArray = require('../db');
 
 router.get('/', (req, res) => {
-    res.render('friends', {
+    res.render('template', {
         locals: {
             friends: friendsArray
+        },
+        partials: {
+            body: "partials/friend-list"
         }
     });
 });
@@ -21,13 +24,16 @@ router.get('/:handle', (req, res) => {
         }
     });
     if (friend) {
-        res.render('friend', {
+        res.render('template', {
             locals: {
                 friend: friend // the 2nd friend (to the right of the colon), equals the variable we defined on line 14
+            },
+            partials: {
+                body: "partials/friend-details"
             }
         });
     } else {
-        res.send(`No friends with tag ${handle}`)
+        res.status(404).send(`No friends with tag ${handle}`)
     }
 })
 
