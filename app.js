@@ -20,5 +20,7 @@ SERVER.listen(PORT, HOSTNAME, () => {
 });
 
 const rootController = require('./routes/index');
+const friendsController = require('./routes/friends');
 
 app.use('/', rootController);
+app.use('/friends', friendsController);
